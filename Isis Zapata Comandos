@@ -1,0 +1,64 @@
+[bigdata@localhost ~]$ clear
+
+[bigdata@localhost ~]$ cd /opt
+[bigdata@localhost opt]$ ls
+hadoop  rh  VBoxGuestAdditions-6.1.34
+[bigdata@localhost opt]$ cd hadoop
+[bigdata@localhost hadoop]$ ls
+bin  include  libexec         licenses-binary  logs           NOTICE.txt  sbin
+etc  lib      LICENSE-binary  LICENSE.txt      NOTICE-binary  README.txt  share
+[bigdata@localhost hadoop]$ cd sbin/
+[bigdata@localhost sbin]$ ls
+distribute-exclude.sh    refresh-namenodes.sh  start-yarn.cmd    stop-secure-dns.sh
+FederationStateStore     start-all.cmd         start-yarn.sh     stop-yarn.cmd
+hadoop-daemon.sh         start-all.sh          stop-all.cmd      stop-yarn.sh
+hadoop-daemons.sh        start-balancer.sh     stop-all.sh       workers.sh
+httpfs.sh                start-dfs.cmd         stop-balancer.sh  yarn-daemon.sh
+kms.sh                   start-dfs.sh          stop-dfs.cmd      yarn-daemons.sh
+mr-jobhistory-daemon.sh  start-secure-dns.sh   stop-dfs.sh
+[bigdata@localhost sbin]$ echo hola >>ISIS_ZAPATA.txt
+[bigdata@localhost sbin]$ ls
+distribute-exclude.sh    start-all.sh         stop-dfs.cmd
+FederationStateStore     start-balancer.sh    stop-dfs.sh
+hadoop-daemon.sh         start-dfs.cmd        stop-secure-dns.sh
+hadoop-daemons.sh        start-dfs.sh         stop-yarn.cmd
+httpfs.sh                start-secure-dns.sh  stop-yarn.sh
+ISIS_ZAPATA.txt          start-yarn.cmd       workers.sh
+kms.sh                   start-yarn.sh        yarn-daemon.sh
+mr-jobhistory-daemon.sh  stop-all.cmd         yarn-daemons.sh
+refresh-namenodes.sh     stop-all.sh
+start-all.cmd            stop-balancer.sh
+[bigdata@localhost sbin]$ hdfs dfs -mkdir PRUEBA_ISIS_ZAPATA
+mkdir: Call From localhost/127.0.0.1 to localhost:9000 failed on connection exception: java.net.ConnectException: Conexión rehusada; For more details see:  http://wiki.apache.org/hadoop/ConnectionRefused
+[bigdata@localhost sbin]$ hdfs dfs -mkdir PRUEBA_ISIS_ZAPATA
+mkdir: Call From localhost/127.0.0.1 to localhost:9000 failed on connection exception: java.net.ConnectException: Conexión rehusada; For more details see:  http://wiki.apache.org/hadoop/ConnectionRefused
+[bigdata@localhost sbin]$ hdfs dfs -ls /
+ls: Call From localhost/127.0.0.1 to localhost:9000 failed on connection exception: java.net.ConnectException: Conexión rehusada; For more details see:  http://wiki.apache.org/hadoop/ConnectionRefused
+[bigdata@localhost sbin]$ jps
+20078 Jps
+[bigdata@localhost sbin]$ refresh-namenodes.sh
+Refreshing namenode [localhost:9000]
+refreshNodes: Call From localhost/127.0.0.1 to localhost:9000 failed on connection exception: java.net.ConnectException: Conexión rehusada; For more details see:  http://wiki.apache.org/hadoop/ConnectionRefused
+Error: refresh of namenodes failed, see error messages above.
+[bigdata@localhost sbin]$ jps
+20320 Jps
+[bigdata@localhost sbin]$ stop-dfs.sh
+Stopping namenodes on [localhost]
+Stopping datanodes
+Stopping secondary namenodes [localhost]
+[bigdata@localhost sbin]$ start-dfs.sh
+Starting namenodes on [localhost]
+Starting datanodes
+Starting secondary namenodes [localhost]
+[bigdata@localhost sbin]$ jps
+20992 NameNode
+21604 Jps
+21112 DataNode
+21343 SecondaryNameNode
+[bigdata@localhost sbin]$ hdfs dfs -mkdir PRUEBA_ISIS_ZAPATA
+mkdir: `hdfs://localhost:9000/user/bigdata': No such file or directory
+[bigdata@localhost sbin]$ hdfs dfs -mkdir /PRUEBA_ISIS_ZAPATA
+[bigdata@localhost sbin]$ 
+[bigdata@localhost sbin]$ hdfs dfs -put ISIS_ZAPATA.txt /PRUEBA_ISIS_ZAPATA
+[bigdata@localhost sbin]$ 
+
